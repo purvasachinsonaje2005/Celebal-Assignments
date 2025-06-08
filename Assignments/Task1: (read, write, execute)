@@ -1,0 +1,15 @@
+[1]Create a file, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using chmod.
+
+PS C:\Users\sonaj> wsl
+LAPTOP-NQLE2B1C:/mnt/host/c/Users/sonaj# cd
+LAPTOP-NQLE2B1C:~# pwd
+/root
+LAPTOP-NQLE2B1C:~# ls
+LAPTOP-NQLE2B1C:~# touch myfile.txt
+LAPTOP-NQLE2B1C:~# ls -l myfile.txt
+-rw-r--r--    1 root     root             0 Jun  8 09:08 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod 777 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod 754 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod u+x myfile.txt
+LAPTOP-NQLE2B1C:~# ls
+myfile.txt
