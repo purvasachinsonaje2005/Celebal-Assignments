@@ -9,7 +9,7 @@ LAPTOP-NQLE2B1C:~# touch myfile.txt
 LAPTOP-NQLE2B1C:~# ls -l myfile.txt
 -rw-r--r--    1 root     root             0 Jun  8 09:08 myfile.txt
 LAPTOP-NQLE2B1C:~# chmod 777 myfile.txt
-LAPTOP-NQLE2B1C:~# chmod 754 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod 754 myfile.txt 
 LAPTOP-NQLE2B1C:~# chmod u+x myfile.txt
 LAPTOP-NQLE2B1C:~# ls
 myfile.txt
