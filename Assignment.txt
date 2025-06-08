@@ -1,0 +1,315 @@
+[1]Create a file, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using chmod.
+
+PS C:\Users\sonaj> wsl
+LAPTOP-NQLE2B1C:/mnt/host/c/Users/sonaj# cd
+LAPTOP-NQLE2B1C:~# pwd
+/root
+LAPTOP-NQLE2B1C:~# ls
+LAPTOP-NQLE2B1C:~# touch myfile.txt
+LAPTOP-NQLE2B1C:~# ls -l myfile.txt
+-rw-r--r--    1 root     root             0 Jun  8 09:08 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod 777 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod 754 myfile.txt
+LAPTOP-NQLE2B1C:~# chmod u+x myfile.txt
+LAPTOP-NQLE2B1C:~# ls
+myfile.txt
+
+[2]Execute basic Linux commands (e.g., ls, cd, mkdir, rm, touch) to manipulate files and directories, with an emphasis on understanding their usage.
+
+LAPTOP-NQLE2B1C:~# pwd
+/root
+LAPTOP-NQLE2B1C:~# mkdir testdir
+LAPTOP-NQLE2B1C:~# cd testdir
+LAPTOP-NQLE2B1C:~/testdir# touch test.txt
+LAPTOP-NQLE2B1C:~/testdir# echo "Hello" > test.txt
+LAPTOP-NQLE2B1C:~/testdir# cat test.txt
+Hello
+LAPTOP-NQLE2B1C:~/testdir# echo "It's a Linux Operating System" > test.txt
+LAPTOP-NQLE2B1C:~/testdir# cat test.txt
+It's a Linux Operating System
+LAPTOP-NQLE2B1C:~/testdir# rm test.txt
+LAPTOP-NQLE2B1C:~/testdir# cd..
+-sh: cd..: not found
+LAPTOP-NQLE2B1C:~/testdir# rmdir testdir
+rmdir: 'testdir': No such file or directory
+
+[3]Using the terminal, practice navigating through directories, listing file contents, and moving files to different locations.
+
+LAPTOP-NQLE2B1C:~/testdir# cd
+LAPTOP-NQLE2B1C:~# mkdir folder1 folder2
+LAPTOP-NQLE2B1C:~# ls
+folder1     folder2     myfile.txt  testdir
+LAPTOP-NQLE2B1C:~# touch folder1/a.txt folder2/
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+LAPTOP-NQLE2B1C:~# touch folder2/a.txt folder1/
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# rm folder2/a.txt
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+LAPTOP-NQLE2B1C:~# mv folder1/a.txt folder2/
+LAPTOP-NQLE2B1C:~# ls folder2
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder1
+LAPTOP-NQLE2B1C:~# sudo apt update
+-sh: sudo: not found
+LAPTOP-NQLE2B1C:~#
+
+[4]Create a new user and group, set their permissions, and explore user management commands like useradd, usermod, and userdel.
+
+Windows PowerShell
+PS C:\Users\sonaj> wsl -d Ubuntu-22.04
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo apt update
+[sudo] password for purvas_005:
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Fetched 384 kB in 3s (126 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+98 packages can be upgraded. Run 'apt list --upgradable' to see them.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo adduser testuser
+Adding user `testuser' ...
+Adding new group `testuser' (1001) ...
+Adding new user `testuser' (1001) with group `testuser' ...
+Creating home directory `/home/testuser' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for testuser
+Enter the new value, or press ENTER for the default
+        Full Name []: Purva Sachin Sonaje
+        Room Number []: 12
+        Work Phone []: 9518765219
+        Home Phone []: 7057054330
+        Other []: 9518765219
+Is the information correct? [Y/n] Y
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo groupadd testgroup
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo deluser testuser
+Removing user `testuser' ...
+Warning: group `testuser' has no more members.
+Done.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo adduser testuser1
+Adding user `testuser1' ...
+Adding new group `testuser1' (1001) ...
+Adding new user `testuser1' (1001) with group `testuser1' ...
+Creating home directory `/home/testuser1' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for testuser1
+Enter the new value, or press ENTER for the default
+        Full Name []: Janhavi
+        Room Number []: 13
+        Work Phone []: 9570945885
+        Home Phone []: 3487067054
+        Other []: 8485430443
+Is the information correct? [Y/n] n
+Changing the user information for testuser1
+Enter the new value, or press ENTER for the default
+        Full Name [Janhavi]:
+        Room Number [13]:
+        Work Phone [9570945885]:
+        Home Phone [3487067054]:
+        Other [8485430443]:
+Is the information correct? [Y/n] y
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser
+usermod: user 'testuser' does not exist
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser1
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo deluser testuser
+/usr/sbin/deluser: The user `testuser' does not exist.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ getent passwd | grep testuser
+testuser1:x:1001:1001:Janhavi,13,9570945885,3487067054,8485430443:/home/testuser1:/bin/bash
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ getent group | grep testgroup
+testgroup:x:1002:testuser1
+
+[5]Practices more linux commands
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ history
+    1  sudo apt update
+    2  sudo apt install git
+    3  touch myfile.txt
+    4  pwd
+    5  ls -l
+    6  ls -l myfile.txt
+    7  chmod 777 myfile.txt
+    8  chmod 754 myfile.txt
+    9  chmod u+x myfile.txt
+   10  ls
+   11  touch myfile1.txt
+   12  ls
+   13  pwd
+   14  sudo apt update
+   15  sudo adduser testuser
+   16  sudo groupadd testgroup
+   17  ls
+   18  sudo usermod -aG testgroup testuser
+   19  sudo deluser testuser
+   20  sudo adduser testuser1
+   21  sudo usermod -aG testgroup testuser
+   22  sudo usermod -aG testgroup testuser1
+   23  sudo deluser testuser
+   24  getent passwd | grep testuser
+   25  getent group | grep testgroup
+   26  history
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ man chmod
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ man chmod
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+none            1.9G     0  1.9G   0% /usr/lib/modules/5.15.167.4-microsoft-standard-WSL2
+none            1.9G  4.0K  1.9G   1% /mnt/wsl
+drivers         238G  187G   52G  79% /usr/lib/wsl/drivers
+/dev/sdd       1007G  1.4G  955G   1% /
+none            1.9G   80K  1.9G   1% /mnt/wslg
+none            1.9G     0  1.9G   0% /usr/lib/wsl/lib
+rootfs          1.9G  2.2M  1.9G   1% /init
+none            1.9G  480K  1.9G   1% /run
+none            1.9G     0  1.9G   0% /run/lock
+none            1.9G     0  1.9G   0% /run/shm
+tmpfs           4.0M     0  4.0M   0% /sys/fs/cgroup
+none            1.9G   76K  1.9G   1% /mnt/wslg/versions.txt
+none            1.9G   76K  1.9G   1% /mnt/wslg/doc
+C:\             238G  187G   52G  79% /mnt/c
+D:\             311G   14G  298G   5% /mnt/d
+E:\             311G  9.0G  302G   3% /mnt/e
+F:\             311G  115M  311G   1% /mnt/f
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ top
+top - 15:15:43 up 38 min,  1 user,  load average: 0.00, 0.00, 0.00
+Tasks:  25 total,   1 running,  24 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.1 us,  0.0 sy,  0.0 ni, 99.9 id,  0.0 wa,  0.0 hi,  0.0 si,  0.
+MiB Mem :   3857.6 total,   3412.3 free,    325.7 used,    119.7 buff/cache
+MiB Swap:   1024.0 total,   1024.0 free,      0.0 used.   3390.9 avail Mem
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+
+      1 root      20   0  165808  11248   8372 S   0.0   0.3   0:00.46
+      2 root      20   0    2616   1440   1320 S   0.0   0.0   0:00.00
+      9 root      20   0    2616    132    132 S   0.0   0.0   0:00.01
+     62 root      19  -1   47824  14756  13728 S   0.0   0.4   0:00.18
+     88 root      20   0   21964   5616   4368 S   0.0   0.1   0:00.06
+    102 systemd+  20   0   25664  12748   8396 S   0.0   0.3   0:00.11
+    112 systemd+  20   0   89364   6572   5764 S   0.0   0.2   0:00.12
+    177 root      20   0    4308   2764   2536 S   0.0   0.1   0:00.00
+    180 message+  20   0    8588   4580   4036 S   0.0   0.1   0:00.06
+    184 root      20   0   30140  19180  10376 S   0.0   0.5   0:00.10
+    185 syslog    20   0  222404   7076   4272 S   0.0   0.2   0:00.02
+    188 root      20   0   15332   7304   6364 S   0.0   0.2   0:00.09
+    200 root      20   0    3240   1084    988 S   0.0   0.0   0:00.00
+    211 root      20   0    3196   1052    964 S   0.0   0.0   0:00.00
+    218 root      20   0  107164  21288  13180 S   0.0   0.5   0:00.08
+    282 root      20   0    2616    120      0 S   0.0   0.0   0:00.00
+    283 root      20   0    2616    120      0 S   0.0   0.0   0:00.15
+    284 purvas_+  20   0    6200   5232   3480 S   0.0   0.1   0:00.09
+    285 root      20   0    7532   5060   4136 S   0.0   0.1   0:00.00
+    336 purvas_+  20   0   16932   9244   7776 S   0.0   0.2   0:00.04
+    337 purvas_+  20   0  103200   3320      4 S   0.0   0.1   0:00.00
+    342 purvas_+  20   0    6104   4880   3292 S   0.0   0.1   0:00.01
+    660 root      20   0  293020  22572  17620 S   0.0   0.6   0:00.02
+    664 root      20   0  234512   6820   6192 S   0.0   0.2   0:00.00
+    841 purvas_+  20   0    7816   3692   3088 R   0.0   0.1   0:00.00
+
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ whoami
+purvas_005
+
+[6]Introduction to version control and Git basics, Git installation and configuration, Basic Git commands (init, add, commit, push, pull)
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo apt install git
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+git is already the newest version (1:2.34.1-1ubuntu1.12).
+git set to manually installed.
+0 upgraded, 0 newly installed, 0 to remove and 98 not upgraded.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global user.name "Your Name"
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global user.name "Purva Sonaje"
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global user.email "purvasonaje.arcade@gmail.com"
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ mkdir gitdemo && cd gitdemo
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/gitdemo$ git init
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint:
+hint:   git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint:   git branch -m <name>
+Initialized empty Git repository in /mnt/c/Users/sonaj/gitdemo/.git/
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/gitdemo$ touch file1.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/gitdemo$ ls
+file1.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/gitdemo$ git add file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/gitdemo$ git commit -m "Initial commit"
+On branch master
+nothing to commit, working tree clean
+
+[7] Setup a remote repository in Local , Add a file and commit or save the changes and push to master branch
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ echo "# Celebal-Assignments" >> README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git init
+Reinitialized existing Git repository in /mnt/c/Users/sonaj/.git/
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "first commit"
+[master (root-commit) 08afba6] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git branch -M main
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git remote add origin git@github.com:purvasachinsonaje2005/Celebal-Assignments.git
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git push -u origin main
+The authenticity of host 'github.com (20.207.73.82)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout -b feature-branch
+Switched to a new branch 'feature-branch'
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ echo "some changes" >> file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "Made changes in feature-branch"
+[feature-branch 44074bd] Made changes in feature-branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+[8] Merge types, Create a new branch then commit and push the changes to new branch and merge it with the master branch using pull request.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ ssh-keygen -t ed25519 -C "sonajesachin@gmail.com"
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/purvas_005/.ssh/id_ed25519):
+/home/purvas_005/.ssh/id_ed25519 already exists.
+Overwrite (y/n)?
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+Agent pid 429
+Identity added: /home/purvas_005/.ssh/id_ed25519 (your-email@example.com)
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ cat ~/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKrtTusWZNhUCtdP4LmWarlCK6z50SGF5f3JEQQD3dpJ your-email@example.com
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git remote set-url origin git@github.com:purvasachinsonaje2005/Celebal-Assignments.git
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git push -u origin feature-branch
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (6/6), 521 bytes | 14.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:purvasachinsonaje2005/Celebal-Assignments.git
+ * [new branch]      feature-branch -> feature-branch
+Branch 'feature-branch' set up to track remote branch 'feature-branch' from 'origin'.
+
+
