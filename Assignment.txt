@@ -1,4 +1,4 @@
-[1]Create a file, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using chmod.
+[1]Create a file, assign permissions (read, write, execute) to different user categories (owner, group, others), and practice changing permissions using chmod. 
 
 PS C:\Users\sonaj> wsl
 LAPTOP-NQLE2B1C:/mnt/host/c/Users/sonaj# cd
