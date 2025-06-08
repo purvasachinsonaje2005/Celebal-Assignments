@@ -1,0 +1,26 @@
+[3]Using the terminal, practice navigating through directories, listing file contents, and moving files to different locations.
+
+LAPTOP-NQLE2B1C:~/testdir# cd
+LAPTOP-NQLE2B1C:~# mkdir folder1 folder2
+LAPTOP-NQLE2B1C:~# ls
+folder1     folder2     myfile.txt  testdir
+LAPTOP-NQLE2B1C:~# touch folder1/a.txt folder2/
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+LAPTOP-NQLE2B1C:~# touch folder2/a.txt folder1/
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# rm folder2/a.txt
+LAPTOP-NQLE2B1C:~# ls folder1
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+LAPTOP-NQLE2B1C:~# mv folder1/a.txt folder2/
+LAPTOP-NQLE2B1C:~# ls folder2
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder2
+a.txt
+LAPTOP-NQLE2B1C:~# ls folder1
+LAPTOP-NQLE2B1C:~# sudo apt update
+-sh: sudo: not found
+LAPTOP-NQLE2B1C:~#
