@@ -1,0 +1,77 @@
+[4]Create a new user and group, set their permissions, and explore user management commands like useradd, usermod, and userdel.
+
+
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\sonaj> wsl -d Ubuntu-22.04
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo apt update
+[sudo] password for purvas_005:
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Fetched 384 kB in 3s (126 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+98 packages can be upgraded. Run 'apt list --upgradable' to see them.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo adduser testuser
+Adding user `testuser' ...
+Adding new group `testuser' (1001) ...
+Adding new user `testuser' (1001) with group `testuser' ...
+Creating home directory `/home/testuser' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for testuser
+Enter the new value, or press ENTER for the default
+        Full Name []: Purva Sachin Sonaje
+        Room Number []: 12
+        Work Phone []: 9518765219
+        Home Phone []: 7057054330
+        Other []: 9518765219
+Is the information correct? [Y/n] Y
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo groupadd testgroup
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo deluser testuser
+Removing user `testuser' ...
+Warning: group `testuser' has no more members.
+Done.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo adduser testuser1
+Adding user `testuser1' ...
+Adding new group `testuser1' (1001) ...
+Adding new user `testuser1' (1001) with group `testuser1' ...
+Creating home directory `/home/testuser1' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for testuser1
+Enter the new value, or press ENTER for the default
+        Full Name []: Janhavi
+        Room Number []: 13
+        Work Phone []: 9570945885
+        Home Phone []: 3487067054
+        Other []: 8485430443
+Is the information correct? [Y/n] n
+Changing the user information for testuser1
+Enter the new value, or press ENTER for the default
+        Full Name [Janhavi]:
+        Room Number [13]:
+        Work Phone [9570945885]:
+        Home Phone [3487067054]:
+        Other [8485430443]:
+Is the information correct? [Y/n] y
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser
+usermod: user 'testuser' does not exist
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo usermod -aG testgroup testuser1
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ sudo deluser testuser
+/usr/sbin/deluser: The user `testuser' does not exist.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ getent passwd | grep testuser
+testuser1:x:1001:1001:Janhavi,13,9570945885,3487067054,8485430443:/home/testuser1:/bin/bash
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ getent group | grep testgroup
+testgroup:x:1002:testuser1
