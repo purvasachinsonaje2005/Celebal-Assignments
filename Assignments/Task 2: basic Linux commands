@@ -1,0 +1,18 @@
+[2]Execute basic Linux commands (e.g., ls, cd, mkdir, rm, touch) to manipulate files and directories, with an emphasis on understanding their usage.
+
+LAPTOP-NQLE2B1C:~# pwd
+/root
+LAPTOP-NQLE2B1C:~# mkdir testdir
+LAPTOP-NQLE2B1C:~# cd testdir
+LAPTOP-NQLE2B1C:~/testdir# touch test.txt
+LAPTOP-NQLE2B1C:~/testdir# echo "Hello" > test.txt
+LAPTOP-NQLE2B1C:~/testdir# cat test.txt
+Hello
+LAPTOP-NQLE2B1C:~/testdir# echo "It's a Linux Operating System" > test.txt
+LAPTOP-NQLE2B1C:~/testdir# cat test.txt
+It's a Linux Operating System
+LAPTOP-NQLE2B1C:~/testdir# rm test.txt
+LAPTOP-NQLE2B1C:~/testdir# cd..
+-sh: cd..: not found
+LAPTOP-NQLE2B1C:~/testdir# rmdir testdir
+rmdir: 'testdir': No such file or directory
