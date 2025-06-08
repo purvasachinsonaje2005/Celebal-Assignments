@@ -1,0 +1,31 @@
+[7] Setup a remote repository in Local , Add a file and commit or save the changes and push to master branch
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ echo "# Celebal-Assignments" >> README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git init
+Reinitialized existing Git repository in /mnt/c/Users/sonaj/.git/
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "first commit"
+[master (root-commit) 08afba6] first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git branch -M main
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git remote add origin git@github.com:purvasachinsonaje2005/Celebal-Assignments.git
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git push -u origin main
+The authenticity of host 'github.com (20.207.73.82)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? y
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+Please make sure you have the correct access rights
+and the repository exists.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout -b feature-branch
+Switched to a new branch 'feature-branch'
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ echo "some changes" >> file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "Made changes in feature-branch"
+[feature-branch 44074bd] Made changes in feature-branch
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
