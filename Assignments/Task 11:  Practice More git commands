@@ -1,1 +1,56 @@
 [11] Practice More git commands
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global user.name "Purva"
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global user.email "sonajesachin@gmail.com"
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git config --global init.defaultBranch main
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ mkdir my-git-practice
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ cd my-git-practice
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git init
+Initialized empty Git repository in /mnt/c/Users/sonaj/my-git-practice/.git/
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ echo "Hello Git!" > file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git status
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        file1.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git add file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git commit -m "Add file1.txt"
+[main (root-commit) 5bad0aa] Add file1.txt
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git log
+commit 5bad0aa36ff6687219ab0f88f4e99b6b2a19d853 (HEAD -> main)
+Author: Purva <sonajesachin@gmail.com>
+Date:   Mon Jun 9 14:00:13 2025 +0530
+
+    Add file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git log --oneline --graph
+* 5bad0aa (HEAD -> main) Add file1.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git stash
+No local changes to save
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git stash pop
+No stash entries found.
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git clean -fd
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$ git init
+Reinitialized existing Git repository in /mnt/c/Users/sonaj/my-git-practice/.git/
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj/my-git-practice$
