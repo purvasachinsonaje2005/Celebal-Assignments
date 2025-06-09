@@ -1,0 +1,13 @@
+[8]Merge types, Create a new branch then commit and push the changes to new branch and merge it with the master branch using pull request.
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git push origin  feature-branch --force
+Enumerating objects: 78, done.
+Counting objects: 100% (78/78), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (73/73), done.
+Writing objects: 100% (78/78), 24.31 KiB | 299.00 KiB/s, done.
+Total 78 (delta 40), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (40/40), done.
+To github.com:purvasachinsonaje2005/Celebal-Assignments.git
+ + d14da47...c33751a feature-branch -> feature-branch (forced update)
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$
