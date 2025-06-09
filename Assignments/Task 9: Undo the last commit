@@ -1,1 +1,32 @@
 [9] Undo the last commit or remove the last created file from remote repo using CLI
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git log --graph --all
+* commit 7accb0a0b2e20da8a132b288ef0c7033f39a9ddf (HEAD -> main)
+| Author: purvasachinsonaje2005 <sonajesachin@gmail.com>
+| Date:   Mon Jun 9 13:42:32 2025 +0530
+|
+|     Resolved merge conflict between main and feature-1
+|
+| * commit c33751ab9b5583f0cd917341fb9f2633faa21dd4 (origin/feature-branch, feature-branch)
+| | Author: purvasachinsonaje2005 <sonajesachin@gmail.com>
+| | Date:   Sun Jun 8 20:33:03 2025 +0530
+| |
+| |     Update .gitignore to exclude more files
+| |
+| * commit 6aebf5106349af17257552e7537a660662d33d5b
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Mon Jun 9 09:47:56 2025 +0530
+| |
+| |     Update README (1).md
+| |
+| * commit 9675f64795925b713280d2c059aa96280a75bc07
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Sun Jun 8 22:32:24 2025 +0530
+| |
+| |     Create Task 7: Setup a remote repository in Local
+| |
+| * commit 0117de09367734dceca338f0be0ea648c2423578
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Sun Jun 8 22:27:35 2025 +0530
+| |
+| |     Delete old Assignment.txt
