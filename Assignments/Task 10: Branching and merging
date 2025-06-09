@@ -1,1 +1,353 @@
 [10] Branching and merging in Git, Resolve a merge conflicts
+
+PS C:\Users\sonaj> wsl -d Ubuntu-22.04
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git branch feature-1
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout feature-1
+Switched to branch 'feature-1'
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout -b feature-1
+fatal: A branch named 'feature-1' already exists.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout main
+Switched to branch 'main'
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git merge feature-1
+Already up to date.
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ echo "Hello from main" > file.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add
+Nothing specified, nothing added.
+hint: Maybe you wanted to say 'git add .'?
+hint: Turn this message off by running
+hint: "git config advice.addEmptyPathspec false"
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout main
+Already on 'main'
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git merge feature-1
+
+Already up to date.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add file.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "Resolved merge conflict between main and feature-1"
+[main 7accb0a] Resolved merge conflict between main and feature-1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .android/
+        .cache/
+        .dbclient/
+        .docker/
+        .eclipse/
+        .gitconfig
+        .ipynb_checkpoints/
+        .ipython/
+        .jupyter/
+        .keras/
+        .m2/
+        .matplotlib/
+        .p2/
+        .packettracer
+        .streamlit/
+        .vscode/
+        AppData/
+        Application Data
+        Celebal-Assignments/
+        Cisco Packet Tracer 8.2.2/
+        Contacts/
+        Cookies
+        Documents/
+        Downloads/
+        Favorites/
+        IS TA-III.ipynb
+        IntelGraphicsProfiles/
+        Links/
+        Local Settings
+        ML_II/
+        Music/
+        My Documents
+        NLTP Practicals/
+        NTUSER.DAT
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TM.blf
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000001.regtrans-ms
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000002.regtrans-ms
+        NetHood
+        OneDrive/
+        PrintHood
+        Recent
+        SIH/
+        Saved Games/
+        Searches/
+        SendTo
+        Start Menu
+        System.sql
+        System1.sql
+        Templates
+        Untitled.ipynb
+        Untitled1.ipynb
+        Untitled2.ipynb
+        Untitled3.ipynb
+        Untitled4.ipynb
+        Untitled5.ipynb
+        Videos/
+        Zensaar Training/
+        circle/
+        eclipse-workspace/
+        eclipse/
+        feature.txt
+        file1.txt
+        gitdemo/
+        hr.sql
+        hr1.sql
+        hr2.sql
+        hr3.sql
+        ntuser.dat.LOG1
+        ntuser.dat.LOG2
+        ntuser.ini
+        package-lock.json
+        programming/
+        purva-eclipse-workspace/
+        rectangle/
+        rectangle1/
+        socket/
+        sqlite.db
+        sqlite.ipynb
+        square/
+        student.csv
+        try1/
+        try3/
+        untitled.txt
+        workspace/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add
+Nothing specified, nothing added.
+hint: Maybe you wanted to say 'git add .'?
+hint: Turn this message off by running
+hint: "git config advice.addEmptyPathspec false"
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "Main branch changes"
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .android/
+        .cache/
+        .dbclient/
+        .docker/
+        .eclipse/
+        .gitconfig
+        .ipynb_checkpoints/
+        .ipython/
+        .jupyter/
+        .keras/
+        .m2/
+        .matplotlib/
+        .p2/
+        .packettracer
+        .streamlit/
+        .vscode/
+        AppData/
+        Application Data
+        Celebal-Assignments/
+        Cisco Packet Tracer 8.2.2/
+        Contacts/
+        Cookies
+        Documents/
+        Downloads/
+        Favorites/
+        IS TA-III.ipynb
+        IntelGraphicsProfiles/
+        Links/
+        Local Settings
+        ML_II/
+        Music/
+        My Documents
+        NLTP Practicals/
+        NTUSER.DAT
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TM.blf
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000001.regtrans-ms
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000002.regtrans-ms
+        NetHood
+        OneDrive/
+        PrintHood
+        Recent
+        SIH/
+        Saved Games/
+        Searches/
+        SendTo
+        Start Menu
+        System.sql
+        System1.sql
+        Templates
+        Untitled.ipynb
+        Untitled1.ipynb
+        Untitled2.ipynb
+        Untitled3.ipynb
+        Untitled4.ipynb
+        Untitled5.ipynb
+        Videos/
+        Zensaar Training/
+        circle/
+        eclipse-workspace/
+        eclipse/
+        feature.txt
+        file.txt
+        file1.txt
+        gitdemo/
+        hr.sql
+        hr1.sql
+        hr2.sql
+        hr3.sql
+        ntuser.dat.LOG1
+        ntuser.dat.LOG2
+        ntuser.ini
+        package-lock.json
+        programming/
+        purva-eclipse-workspace/
+        rectangle/
+        rectangle1/
+        socket/
+        sqlite.db
+        sqlite.ipynb
+        square/
+        student.csv
+        try1/
+        try3/
+        untitled.txt
+        workspace/
+
+nothing added to commit but untracked files present (use "git add" to track)
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git checkout main
+Already on 'main'
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git merge feature-1
+Already up to date.
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git add file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git commit -m "Resolved merge conflict between main and feature-1"
+[main 7accb0a] Resolved merge conflict between main and feature-1
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .android/
+        .cache/
+        .dbclient/
+        .docker/
+        .eclipse/
+        .gitconfig
+        .ipynb_checkpoints/
+        .ipython/
+        .jupyter/
+        .keras/
+        .m2/
+        .matplotlib/
+        .p2/
+        .packettracer
+        .streamlit/
+        .vscode/
+        AppData/
+        Application Data
+        Celebal-Assignments/
+        Cisco Packet Tracer 8.2.2/
+        Contacts/
+        Cookies
+        Documents/
+        Downloads/
+        Favorites/
+        IS TA-III.ipynb
+        IntelGraphicsProfiles/
+        Links/
+        Local Settings
+        ML_II/
+        Music/
+        My Documents
+        NLTP Practicals/
+        NTUSER.DAT
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TM.blf
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000001.regtrans-ms
+        NTUSER.DAT{0d8ad8e9-f4b7-11ef-ae21-846993297614}.TMContainer00000000000000000002.regtrans-ms
+        NetHood
+        OneDrive/
+        PrintHood
+        Recent
+        SIH/
+        Saved Games/
+        Searches/
+        SendTo
+        Start Menu
+        System.sql
+        System1.sql
+        Templates
+        Untitled.ipynb
+        Untitled1.ipynb
+        Untitled2.ipynb
+        Untitled3.ipynb
+        Untitled4.ipynb
+        Untitled5.ipynb
+        Videos/
+        Zensaar Training/
+        circle/
+        eclipse-workspace/
+        eclipse/
+        feature.txt
+        file1.txt
+        gitdemo/
+        hr.sql
+        hr1.sql
+        hr2.sql
+        hr3.sql
+        ntuser.dat.LOG1
+        ntuser.dat.LOG2
+        ntuser.ini
+        package-lock.json
+        programming/
+        purva-eclipse-workspace/
+        rectangle/
+        rectangle1/
+        socket/
+        sqlite.db
+        sqlite.ipynb
+        square/
+        student.csv
+        try1/
+        try3/
+        untitled.txt
+        workspace/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+purvas_005@LAPTOP-NQLE2B1C:/mnt/c/Users/sonaj$ git log --graph --all
+* commit 7accb0a0b2e20da8a132b288ef0c7033f39a9ddf (HEAD -> main)
+| Author: purvasachinsonaje2005 <sonajesachin@gmail.com>
+| Date:   Mon Jun 9 13:42:32 2025 +0530
+|
+|     Resolved merge conflict between main and feature-1
+|
+| * commit c33751ab9b5583f0cd917341fb9f2633faa21dd4 (origin/feature-branch, feature-branch)
+| | Author: purvasachinsonaje2005 <sonajesachin@gmail.com>
+| | Date:   Sun Jun 8 20:33:03 2025 +0530
+| |
+| |     Update .gitignore to exclude more files
+| |
+| * commit 6aebf5106349af17257552e7537a660662d33d5b
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Mon Jun 9 09:47:56 2025 +0530
+| |
+| |     Update README (1).md
+| |
+| * commit 9675f64795925b713280d2c059aa96280a75bc07
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Sun Jun 8 22:32:24 2025 +0530
+| |
+| |     Create Task 7: Setup a remote repository in Local
+| |
+| * commit 0117de09367734dceca338f0be0ea648c2423578
+| | Author: purvasachinsonaje2005 <145986256+purvasachinsonaje2005@users.noreply.github.com>
+| | Date:   Sun Jun 8 22:27:35 2025 +0530
+| |
+| |     Delete old Assignment.txt
