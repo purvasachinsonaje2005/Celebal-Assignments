@@ -1,0 +1,1 @@
+[7]Create and test Azure Application gateway
