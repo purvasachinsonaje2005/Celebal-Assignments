@@ -1,1 +1,86 @@
 [A] Create a Vnet, 2 Subnets Subnet-1: Linux VM, WindowsVM Subnet-2: SQL DB
+
+##Step 1: 1. Create VNet with 2 Subnets##
+C:\Windows\System32>az network vnet create --name MainVNet --resource-group myResourceGroup --address-prefix 10.0.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.0.1.0/24
+Resource provider 'Microsoft.Network' used by this operation is not registered. We are registering for you.
+Registration succeeded.
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.0.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "etag": "W/\"b700b6a0-5ec8-4a0e-957b-2349a95a52cc\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/MainVNet",
+    "location": "eastus",
+    "name": "MainVNet",
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "eced1174-11c7-47b5-bbc8-d76e35e9f56f",
+    "subnets": [
+      {
+        "addressPrefix": "10.0.1.0/24",
+        "delegations": [],
+        "etag": "W/\"b700b6a0-5ec8-4a0e-957b-2349a95a52cc\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/MainVNet/subnets/Subnet1",
+        "name": "Subnet1",
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+
+##Step 2: Add Subnet-2 to same VNet##
+C:\Windows\System32>az network vnet subnet create --resource-group myResourceGroup --vnet-name MainVNet --name Subnet2 --address-prefix 10.0.2.0/24
+{
+  "addressPrefix": "10.0.2.0/24",
+  "delegations": [],
+  "etag": "W/\"87bd65a6-936a-461d-8f8b-d0786d23a0fc\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/MainVNet/subnets/Subnet2",
+  "name": "Subnet2",
+  "privateEndpointNetworkPolicies": "Disabled",
+  "privateLinkServiceNetworkPolicies": "Enabled",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "myResourceGroup",
+  "type": "Microsoft.Network/virtualNetworks/subnets"
+}
+
+
+
+Step 3: Create Linux VM in Subnet1
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name LinuxVM --vnet-name MainVNet --subnet Subnet1 --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/LinuxVM",
+  "location": "eastus",
+  "macAddress": "00-0D-3A-8B-53-4E",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.1.4",
+  "publicIpAddress": "20.185.52.107",
+  "resourceGroup": "myResourceGroup"
+}
+
+
+Step 4:  Create Windows VM in Subnet1
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name WindowsVM --vnet-name MainVNet --subnet Subnet1 --image Win2019Datacenter --size Standard_D2s_v3 --admin-username azureuser --admin-password YourStrongPassword123!
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/WindowsVM",
+  "location": "eastus",
+  "macAddress": "7C-ED-8D-23-35-1D",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.1.5",
+  "publicIpAddress": "172.190.66.13",
+  "resourceGroup": "myResourceGroup"
+}
