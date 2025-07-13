@@ -1,0 +1,359 @@
+[4] Create Container Instance and deploy a simple docker application on it. Create Container Groups and test functionality
+
+###Microsoft azure login
+C:\Windows\System32>az login
+Select the account you want to log in with. For more information on login with Azure CLI, see https://go.microsoft.com/fwlink/?linkid=2271136
+
+Retrieving tenants and subscriptions for the selection...
+
+[Tenant and subscription selection]
+
+No     Subscription name    Subscription ID                       Tenant
+-----  -------------------  ------------------------------------  -------------------------
+[1] *  Azure for Students   c6cb0288-19c9-4a37-94d6-63149b3a8033  Shirpur Education Society
+
+The default is marked with an *; the default tenant is 'Shirpur Education Society' and subscription is 'Azure for Students' (c6cb0288-19c9-4a37-94d6-63149b3a8033).
+
+Select a subscription and tenant (Type a number or Enter for no changes):
+
+Tenant: Shirpur Education Society
+Subscription: Azure for Students (c6cb0288-19c9-4a37-94d6-63149b3a8033)
+
+[Announcements]
+With the new Azure CLI login experience, you can select the subscription you want to use more easily. Learn more about it and its configuration at https://go.microsoft.com/fwlink/?linkid=2271236
+
+If you encounter any problem, please open an issue at https://aka.ms/azclibug
+
+
+Step 1:
+C:\Windows\System32>az group create --name myResourceGroup --location eastus
+{
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup",
+  "location": "eastus",
+  "managedBy": null,
+  "name": "myResourceGroup",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null,
+  "type": "Microsoft.Resources/resourceGroups"
+}
+
+
+
+Step 2:
+C:\Windows\System32>az container create --resource-group myResourceGroup --name mycontainerinstance --image mcr.microsoft.com/azuredocs/aci-helloworld --dns-name-label mycontainerdemo123 --ports 80 --os-type Linux --cpu 1 --memory 1.5
+{
+  "confidentialComputeProperties": null,
+  "containerGroupProfile": null,
+  "containers": [
+    {
+      "command": null,
+      "configMap": {
+        "keyValuePairs": {}
+      },
+      "environmentVariables": [],
+      "image": "mcr.microsoft.com/azuredocs/aci-helloworld",
+      "instanceView": {
+        "currentState": {
+          "detailStatus": "",
+          "exitCode": null,
+          "finishTime": null,
+          "startTime": "2025-07-13T04:46:37.040000+00:00",
+          "state": "Running"
+        },
+        "events": [
+          {
+            "count": 1,
+            "firstTimestamp": "2025-07-11T05:56:49+00:00",
+            "lastTimestamp": "2025-07-11T05:56:49+00:00",
+            "message": "pulling image \"purvasonajeacr123.azurecr.io/hello-world@sha256:03b62250a3cb1abd125271d393fc08bf0cc713391eda6b57c02d1ef85efcc25c\"",
+            "name": "Pulling",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2025-07-11T05:56:50+00:00",
+            "lastTimestamp": "2025-07-11T05:56:50+00:00",
+            "message": "Successfully pulled image \"purvasonajeacr123.azurecr.io/hello-world@sha256:03b62250a3cb1abd125271d393fc08bf0cc713391eda6b57c02d1ef85efcc25c\"",
+            "name": "Pulled",
+            "type": "Normal"
+          },
+          {
+            "count": 27687,
+            "firstTimestamp": "2025-07-11T05:56:57+00:00",
+            "lastTimestamp": "2025-07-13T04:46:25+00:00",
+            "message": "Started container",
+            "name": "Started",
+            "type": "Normal"
+          },
+          {
+            "count": 27688,
+            "firstTimestamp": "2025-07-11T05:57:02+00:00",
+            "lastTimestamp": "2025-07-13T04:46:28+00:00",
+            "message": "Container mycontainerinstance terminated with ExitCode 0.",
+            "name": "Killing",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2025-07-13T04:46:21+00:00",
+            "lastTimestamp": "2025-07-13T04:46:21+00:00",
+            "message": "pulling image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+            "name": "Pulling",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2025-07-13T04:46:24+00:00",
+            "lastTimestamp": "2025-07-13T04:46:24+00:00",
+            "message": "Successfully pulled image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+            "name": "Pulled",
+            "type": "Normal"
+          },
+          {
+            "count": 1,
+            "firstTimestamp": "2025-07-13T04:46:37+00:00",
+            "lastTimestamp": "2025-07-13T04:46:37+00:00",
+            "message": "Started container",
+            "name": "Started",
+            "type": "Normal"
+          }
+        ],
+        "previousState": null,
+        "restartCount": 0
+      },
+      "livenessProbe": null,
+      "name": "mycontainerinstance",
+      "ports": [
+        {
+          "port": 80,
+          "protocol": "TCP"
+        }
+      ],
+      "readinessProbe": null,
+      "resources": {
+        "limits": null,
+        "requests": {
+          "cpu": 1.0,
+          "gpu": null,
+          "memoryInGb": 1.5
+        }
+      },
+      "securityContext": null,
+      "volumeMounts": null
+    }
+  ],
+  "diagnostics": null,
+  "dnsConfig": null,
+  "encryptionProperties": null,
+  "extensions": null,
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.ContainerInstance/containerGroups/mycontainerinstance",
+  "identity": null,
+  "imageRegistryCredentials": null,
+  "initContainers": [],
+  "instanceView": {
+    "events": [],
+    "state": "Running"
+  },
+  "ipAddress": {
+    "autoGeneratedDomainNameLabelScope": "Unsecure",
+    "dnsNameLabel": "mycontainerdemo123",
+    "fqdn": "mycontainerdemo123.eastus.azurecontainer.io",
+    "ip": "52.249.203.48",
+    "ports": [
+      {
+        "port": 80,
+        "protocol": "TCP"
+      }
+    ],
+    "type": "Public"
+  },
+  "isCreatedFromStandbyPool": false,
+  "location": "eastus",
+  "name": "mycontainerinstance",
+  "osType": "Linux",
+  "priority": null,
+  "provisioningState": "Succeeded",
+  "resourceGroup": "myResourceGroup",
+  "restartPolicy": null,
+  "sku": "Standard",
+  "standbyPoolProfile": null,
+  "subnetIds": null,
+  "tags": {},
+  "type": "Microsoft.ContainerInstance/containerGroups",
+  "volumes": null,
+  "zones": null
+}
+
+
+
+
+Step 3:
+C:\Windows\System32>az container create --resource-group myResourceGroup --file "C:\Users\sonaj\Downloads\aci-group.yaml"
+{
+  "extendedLocation": null,
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.ContainerInstance/containerGroups/mycontainergroup",
+  "identity": null,
+  "kind": null,
+  "location": "eastus",
+  "managedBy": null,
+  "name": "mycontainergroup",
+  "plan": null,
+  "properties": {
+    "containers": [
+      {
+        "name": "appcontainer1",
+        "properties": {
+          "configMap": {
+            "keyValuePairs": {}
+          },
+          "environmentVariables": [],
+          "image": "mcr.microsoft.com/azuredocs/aci-helloworld",
+          "instanceView": {
+            "currentState": {
+              "detailStatus": "CrashLoopBackOff: Back-off restarting failed",
+              "state": "Waiting"
+            },
+            "events": [
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:40Z",
+                "lastTimestamp": "2025-07-13T05:19:40Z",
+                "message": "pulling image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+                "name": "Pulling",
+                "type": "Normal"
+              },
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:44Z",
+                "lastTimestamp": "2025-07-13T05:19:44Z",
+                "message": "Successfully pulled image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+                "name": "Pulled",
+                "type": "Normal"
+              },
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:53Z",
+                "lastTimestamp": "2025-07-13T05:19:53Z",
+                "message": "Started container",
+                "name": "Started",
+                "type": "Normal"
+              },
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:59Z",
+                "lastTimestamp": "2025-07-13T05:19:59Z",
+                "message": "Container appcontainer1 terminated with ExitCode 1.",
+                "name": "Killing",
+                "type": "Normal"
+              }
+            ],
+            "previousState": {
+              "detailStatus": "Error",
+              "exitCode": 1,
+              "finishTime": "2025-07-13T05:19:59.228Z",
+              "startTime": "2025-07-13T05:19:53.923Z",
+              "state": "Terminated"
+            },
+            "restartCount": 1
+          },
+          "ports": [
+            {
+              "port": 80
+            }
+          ],
+          "resources": {
+            "requests": {
+              "cpu": 1.0,
+              "memoryInGB": 1.5
+            }
+          }
+        }
+      },
+      {
+        "name": "appcontainer2",
+        "properties": {
+          "configMap": {
+            "keyValuePairs": {}
+          },
+          "environmentVariables": [],
+          "image": "mcr.microsoft.com/azuredocs/aci-helloworld",
+          "instanceView": {
+            "currentState": {
+              "detailStatus": "",
+              "startTime": "2025-07-13T05:19:53.927Z",
+              "state": "Running"
+            },
+            "events": [
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:40Z",
+                "lastTimestamp": "2025-07-13T05:19:40Z",
+                "message": "pulling image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+                "name": "Pulling",
+                "type": "Normal"
+              },
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:44Z",
+                "lastTimestamp": "2025-07-13T05:19:44Z",
+                "message": "Successfully pulled image \"mcr.microsoft.com/azuredocs/aci-helloworld@sha256:b9cec4d6b50c6bf25e3f7f93bdc1628e5dca972cf132d38ed8f5bc955bb179c3\"",
+                "name": "Pulled",
+                "type": "Normal"
+              },
+              {
+                "count": 1,
+                "firstTimestamp": "2025-07-13T05:19:53Z",
+                "lastTimestamp": "2025-07-13T05:19:53Z",
+                "message": "Started container",
+                "name": "Started",
+                "type": "Normal"
+              }
+            ],
+            "restartCount": 0
+          },
+          "ports": [],
+          "resources": {
+            "requests": {
+              "cpu": 1.0,
+              "memoryInGB": 1.5
+            }
+          }
+        }
+      }
+    ],
+    "initContainers": [],
+    "instanceView": {
+      "events": [],
+      "state": "Running"
+    },
+    "ipAddress": {
+      "ip": "48.217.221.80",
+      "ports": [
+        {
+          "port": 80,
+          "protocol": "TCP"
+        }
+      ],
+      "type": "Public"
+    },
+    "isCreatedFromStandbyPool": false,
+    "isCustomProvisioningTimeout": false,
+    "osType": "Linux",
+    "provisioningState": "Succeeded",
+    "provisioningTimeoutInSeconds": 1800,
+    "sku": "Standard"
+  },
+  "resourceGroup": "myResourceGroup",
+  "sku": null,
+  "tags": null,
+  "type": "Microsoft.ContainerInstance/containerGroups"
+}
+
+Step 4:
+C:\Windows\System32>az container show --resource-group myResourceGroup --name mycontainergroup --query ipAddress.fqdn
+
+Step 5:
+C:\Windows\System32>az container show --resource-group myResourceGroup --name mycontainerinstance --query instanceView.state
+"Running"
