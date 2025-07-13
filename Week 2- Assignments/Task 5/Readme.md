@@ -10,6 +10,7 @@ VNet: MainVNet
 Subnet-1: Host Linux & Windows VMs
 
 Subnet-2: Host Azure SQL Database
+
 =======================================================================================================================================
 
 **✅ Task B: Hub and Spoke Architecture with 4 VNets**
