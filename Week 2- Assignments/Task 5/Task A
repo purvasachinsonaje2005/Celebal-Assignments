@@ -1,6 +1,6 @@
 [A] Create a Vnet, 2 Subnets Subnet-1: Linux VM, WindowsVM Subnet-2: SQL DB
 
-##Step 1: 1. Create VNet with 2 Subnets##
+Step 1: 1. Create VNet with 2 Subnets
 C:\Windows\System32>az network vnet create --name MainVNet --resource-group myResourceGroup --address-prefix 10.0.0.0/16 --subnet-name Subnet1 --subnet-prefix 10.0.1.0/24
 Resource provider 'Microsoft.Network' used by this operation is not registered. We are registering for you.
 Registration succeeded.
@@ -39,7 +39,7 @@ Registration succeeded.
   }
 }
 
-##Step 2: Add Subnet-2 to same VNet##
+Step 2: Add Subnet-2 to same VNet
 C:\Windows\System32>az network vnet subnet create --resource-group myResourceGroup --vnet-name MainVNet --name Subnet2 --address-prefix 10.0.2.0/24
 {
   "addressPrefix": "10.0.2.0/24",
