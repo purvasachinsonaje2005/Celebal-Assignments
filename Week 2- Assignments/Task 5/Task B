@@ -1,1 +1,2 @@
+[B] Create 4 VNets 1. Management Vnet (HUB) 2. Production Vnet 3. Testing Vnet 4. Developing Vnet And Configure Hub and Spoke Architecture and verify it's working by launching VM in each VNet and ping from Managemnent VM to every other VM
 
