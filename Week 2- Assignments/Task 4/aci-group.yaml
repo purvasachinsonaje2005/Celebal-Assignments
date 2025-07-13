@@ -1,0 +1,29 @@
+apiVersion: 2021-09-01
+location: eastus
+name: mycontainergroup
+properties:
+  containers:
+  - name: appcontainer1
+    properties:
+      image: mcr.microsoft.com/azuredocs/aci-helloworld
+      ports:
+      - port: 80
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+  - name: appcontainer2
+    properties:
+      image: mcr.microsoft.com/azuredocs/aci-helloworld
+      resources:
+        requests:
+          cpu: 1
+          memoryInGb: 1.5
+  osType: Linux
+  ipAddress:
+    type: Public
+    ports:
+    - protocol: tcp
+      port: 80
+tags: null
+type: Microsoft.ContainerInstance/containerGroups
