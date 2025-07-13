@@ -1,2 +1,620 @@
 [B] Create 4 VNets 1. Management Vnet (HUB) 2. Production Vnet 3. Testing Vnet 4. Developing Vnet And Configure Hub and Spoke Architecture and verify it's working by launching VM in each VNet and ping from Managemnent VM to every other VM
 
+Step 1:  Create All 4 VNets
+
+# Management VNet
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name WindowsVM --vnet-name MainVNet --subnet Subnet1 --image Win2019Datacenter --size Standard_D2s_v3 --admin-username azureuser --admin-password YourStrongPassword123!
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/WindowsVM",
+  "location": "eastus",
+  "macAddress": "7C-ED-8D-23-35-1D",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.1.5",
+  "publicIpAddress": "172.190.66.13",
+  "resourceGroup": "myResourceGroup"
+}
+
+C:\Windows\System32>
+C:\Windows\System32>az network vnet create --resource-group myResourceGroup --name ManagementVnet --address-prefix 10.1.0.0/16 --subnet-name Subnet --subnet-prefix 10.1.0.0/24
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.1.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "etag": "W/\"2a81a979-dfcd-4708-92e5-2e89afaff7ca\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet",
+    "location": "eastus",
+    "name": "ManagementVnet",
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "ba1fac86-a872-4cc1-9c99-420850f18658",
+    "subnets": [
+      {
+        "addressPrefix": "10.1.0.0/24",
+        "delegations": [],
+        "etag": "W/\"2a81a979-dfcd-4708-92e5-2e89afaff7ca\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet/subnets/Subnet",
+        "name": "Subnet",
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+
+
+# Production VNet
+
+COMMAND: az network vnet create --resource-group myResourceGroup --name ManagementVnet --address-prefix 10.1.0.0/16 --subnet-name Subnet --subnet-prefix 10.1.0.0/24
+C:\Windows\System32>az network vnet create --resource-group myResourceGroup --name ManagementVnet --address-prefix 10.1.0.0/16 --subnet-name Subnet --subnet-prefix 10.1.0.0/24
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.1.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "etag": "W/\"2a81a979-dfcd-4708-92e5-2e89afaff7ca\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet",
+    "location": "eastus",
+    "name": "ManagementVnet",
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "ba1fac86-a872-4cc1-9c99-420850f18658",
+    "subnets": [
+      {
+        "addressPrefix": "10.1.0.0/24",
+        "delegations": [],
+        "etag": "W/\"2a81a979-dfcd-4708-92e5-2e89afaff7ca\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet/subnets/Subnet",
+        "name": "Subnet",
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+
+
+# Testing VNet
+COMMAND : az network vnet create --resource-group myResourceGroup --name TestingVnet --address-prefix 10.3.0.0/16 --subnet-name Subnet --subnet-prefix 10.3.0.0/24
+
+C:\Windows\System32>az network vnet create --resource-group myResourceGroup --name TestingVnet --address-prefix 10.3.0.0/16 --subnet-name Subnet --subnet-prefix 10.3.0.0/24
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.3.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "etag": "W/\"489100f9-7708-4648-81e0-629faf5e502f\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/TestingVnet",
+    "location": "eastus",
+    "name": "TestingVnet",
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "8342bdd2-615c-4051-9948-881526f5484a",
+    "subnets": [
+      {
+        "addressPrefix": "10.3.0.0/24",
+        "delegations": [],
+        "etag": "W/\"489100f9-7708-4648-81e0-629faf5e502f\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/TestingVnet/subnets/Subnet",
+        "name": "Subnet",
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+
+
+# Development VNet
+COMMAND : az network vnet create --resource-group myResourceGroup --name DevelopmentVnet --address-prefix 10.4.0.0/16 --subnet-name Subnet --subnet-prefix 10.4.0.0/24
+
+C:\Windows\System32>az network vnet create --resource-group myResourceGroup --name DevelopmentVnet --address-prefix 10.4.0.0/16 --subnet-name Subnet --subnet-prefix 10.4.0.0/24
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+        "10.4.0.0/16"
+      ]
+    },
+    "enableDdosProtection": false,
+    "etag": "W/\"bed69174-433b-4420-a019-a9f95d225adb\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/DevelopmentVnet",
+    "location": "eastus",
+    "name": "DevelopmentVnet",
+    "privateEndpointVNetPolicies": "Disabled",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "a2137c76-1c60-4e1d-8eb5-531cbf06868a",
+    "subnets": [
+      {
+        "addressPrefix": "10.4.0.0/24",
+        "delegations": [],
+        "etag": "W/\"bed69174-433b-4420-a019-a9f95d225adb\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/DevelopmentVnet/subnets/Subnet",
+        "name": "Subnet",
+        "privateEndpointNetworkPolicies": "Disabled",
+        "privateLinkServiceNetworkPolicies": "Enabled",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "type": "Microsoft.Network/virtualNetworks/subnets"
+      }
+    ],
+    "type": "Microsoft.Network/virtualNetworks",
+    "virtualNetworkPeerings": []
+  }
+}
+
+===============================================================================================================================
+STEP 2: Configure VNet Peering
+
+# Hub → Prod
+COMMAND: az network vnet peering create --name ManagementToProduction --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet ProductionVnet --allow-vnet-access
+
+C:\Windows\System32>az network vnet peering create --name ManagementToProduction --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet ProductionVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"19683fbb-f8b6-440c-b82f-eba3d97ee282\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet/virtualNetworkPeerings/ManagementToProduction",
+  "name": "ManagementToProduction",
+  "peerCompleteVnets": true,
+  "peeringState": "Initiated",
+  "peeringSyncLevel": "RemoteNotInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.2.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ProductionVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.2.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "536ce630-d375-073c-03e5-aea991d205af",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+
+
+# Prod → Hub
+COMMAND: az network vnet peering create --name ProductionToManagement --resource-group myResourceGroup --vnet-name ProductionVnet --remote-vnet ManagementVnet --allow-vnet-access
+
+C:\Windows\System32>az network vnet peering create --name ProductionToManagement --resource-group myResourceGroup --vnet-name ProductionVnet --remote-vnet ManagementVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"36a3b4d9-e85f-4598-82e8-cee0e6f69f7a\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ProductionVnet/virtualNetworkPeerings/ProductionToManagement",
+  "name": "ProductionToManagement",
+  "peerCompleteVnets": true,
+  "peeringState": "Connected",
+  "peeringSyncLevel": "FullyInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "536ce630-d375-073c-03e5-aea991d205af",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+
+
+# Hub → Test
+COMMAND: az network vnet peering create --name ManagementToTesting --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet TestingVnet --allow-vnet-access
+
+C:\Windows\System32>az network vnet peering create --name ManagementToTesting --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet TestingVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"0f71d099-285f-4960-a34b-cb8773619a30\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet/virtualNetworkPeerings/ManagementToTesting",
+  "name": "ManagementToTesting",
+  "peerCompleteVnets": true,
+  "peeringState": "Initiated",
+  "peeringSyncLevel": "RemoteNotInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.3.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/TestingVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.3.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "395d1154-c92e-0c90-05d1-ca1d7604ce12",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+
+# Test → Hub
+COMMAND: az network vnet peering create --name TestingToManagement --resource-group myResourceGroup --vnet-name TestingVnet --remote-vnet ManagementVnet --allow-vnet-access
+C:\Windows\System32>az network vnet peering create --name TestingToManagement --resource-group myResourceGroup --vnet-name TestingVnet --remote-vnet ManagementVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"feac9c93-c2ef-43b4-a84c-028559850977\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/TestingVnet/virtualNetworkPeerings/TestingToManagement",
+  "name": "TestingToManagement",
+  "peerCompleteVnets": true,
+  "peeringState": "Connected",
+  "peeringSyncLevel": "FullyInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "395d1154-c92e-0c90-05d1-ca1d7604ce12",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+
+# Hub → Dev
+COMMAND: az network vnet peering create --name ManagementToDevelopment --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet DevelopmentVnet --allow-vnet-access
+C:\Windows\System32>az network vnet peering create --name ManagementToDevelopment --resource-group myResourceGroup --vnet-name ManagementVnet --remote-vnet DevelopmentVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"5d9058d7-7686-4411-9e85-fdc472de0021\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet/virtualNetworkPeerings/ManagementToDevelopment",
+  "name": "ManagementToDevelopment",
+  "peerCompleteVnets": true,
+  "peeringState": "Initiated",
+  "peeringSyncLevel": "RemoteNotInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.4.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/DevelopmentVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.4.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "180cd0f0-b412-02dc-122c-1114eff700d2",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+
+# Dev → Hub
+COMMAND: az network vnet peering create --name DevelopmentToManagement --resource-group myResourceGroup --vnet-name DevelopmentVnet --remote-vnet ManagementVnet --allow-vnet-access
+C:\Windows\System32>az network vnet peering create --name DevelopmentToManagement --resource-group myResourceGroup --vnet-name DevelopmentVnet --remote-vnet ManagementVnet --allow-vnet-access
+{
+  "allowForwardedTraffic": false,
+  "allowGatewayTransit": false,
+  "allowVirtualNetworkAccess": true,
+  "doNotVerifyRemoteGateways": false,
+  "etag": "W/\"54d9e0f8-250c-4d26-b49d-4d07479160dd\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/DevelopmentVnet/virtualNetworkPeerings/DevelopmentToManagement",
+  "name": "DevelopmentToManagement",
+  "peerCompleteVnets": true,
+  "peeringState": "Connected",
+  "peeringSyncLevel": "FullyInSync",
+  "provisioningState": "Succeeded",
+  "remoteAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "remoteVirtualNetwork": {
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/ManagementVnet",
+    "resourceGroup": "myResourceGroup"
+  },
+  "remoteVirtualNetworkAddressSpace": {
+    "addressPrefixes": [
+      "10.1.0.0/16"
+    ]
+  },
+  "resourceGroup": "myResourceGroup",
+  "resourceGuid": "180cd0f0-b412-02dc-122c-1114eff700d2",
+  "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+  "useRemoteGateways": false
+}
+====================================================================================
+STEP 3: Deploy One Linux VM in Each VNet
+
+COMMAND: az vm create --resource-group myResourceGroup --name MgmtVM --vnet-name ManagementVnet --subnet Subnet --image Ubuntu2204 --size Standard_B1s --admin-username 
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name MgmtVM --vnet-name ManagementVnet --subnet Subnet --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/MgmtVM",
+  "location": "eastus",
+  "macAddress": "60-45-BD-A9-9D-8F",
+  "powerState": "VM running",
+  "privateIpAddress": "10.1.0.4",
+  "publicIpAddress": "172.172.149.35",
+  "resourceGroup": "myResourceGroup"
+}
+
+COMMAND: az vm create --resource-group myResourceGroup --name ProdVM --vnet-name ProductionVnet --subnet Subnet --image Ubuntu2204 --size Standard_B1s --admin-username 
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name ProdVM --vnet-name ProductionVnet --subnet Subnet --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys --public-ip-address ""
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/ProdVM",
+  "location": "eastus",
+  "macAddress": "00-0D-3A-58-10-92",
+  "powerState": "VM running",
+  "privateIpAddress": "10.2.0.4",
+  "publicIpAddress": "",
+  "resourceGroup": "myResourceGroup"
+}
+
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name TestVM --vnet-name TestingVnet --subnet Subnet --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys --public-ip-address ""
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/TestVM",
+  "location": "eastus",
+  "macAddress": "7C-1E-52-68-B0-AB",
+  "powerState": "VM running",
+  "privateIpAddress": "10.3.0.4",
+  "publicIpAddress": "",
+  "resourceGroup": "myResourceGroup"
+}
+
+
+COMMND: az vm create --resource-group myResourceGroup --name DevVM --location westeurope --vnet-name DevVnetWE --subnet DevSubnetWE --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys --public-ip-address ""
+
+C:\Windows\System32>az vm create --resource-group myResourceGroup --name DevVM --location westeurope --vnet-name DevVnetWE --subnet DevSubnetWE --image Ubuntu2204 --size Standard_B1s --admin-username azureuser --generate-ssh-keys --public-ip-address ""
+The default value of '--size' will be changed to 'Standard_D2s_v5' from 'Standard_DS1_v2' in a future release.
+Selecting "uksouth" may reduce your costs. The region you've selected may cost more for the same services. You can disable this message in the future with the command "az config set core.display_region_identified=false". Learn more at https://go.microsoft.com/fwlink/?linkid=222571
+
+{
+  "fqdns": "",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/DevVM",
+  "location": "westeurope",
+  "macAddress": "7C-ED-8D-5C-F6-2E",
+  "powerState": "VM running",
+  "privateIpAddress": "10.1.0.4",
+  "publicIpAddress": "",
+  "resourceGroup": "myResourceGroup"
+}
+
+
+Step 4: Enable ICMP (Ping) in NSG:
+C:\Windows\System32>az network nsg create --resource-group myResourceGroup --name DevNSG --location eastus
+{
+  "NewNSG": {
+    "defaultSecurityRules": [
+      {
+        "access": "Allow",
+        "description": "Allow inbound traffic from all VMs in VNET",
+        "destinationAddressPrefix": "VirtualNetwork",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/AllowVnetInBound",
+        "name": "AllowVnetInBound",
+        "priority": 65000,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "VirtualNetwork",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow inbound traffic from azure load balancer",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/AllowAzureLoadBalancerInBound",
+        "name": "AllowAzureLoadBalancerInBound",
+        "priority": 65001,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "AzureLoadBalancer",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Deny",
+        "description": "Deny all inbound traffic",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Inbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/DenyAllInBound",
+        "name": "DenyAllInBound",
+        "priority": 65500,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow outbound traffic from all VMs to all VMs in VNET",
+        "destinationAddressPrefix": "VirtualNetwork",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/AllowVnetOutBound",
+        "name": "AllowVnetOutBound",
+        "priority": 65000,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "VirtualNetwork",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Allow",
+        "description": "Allow outbound traffic from all VMs to Internet",
+        "destinationAddressPrefix": "Internet",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/AllowInternetOutBound",
+        "name": "AllowInternetOutBound",
+        "priority": 65001,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      },
+      {
+        "access": "Deny",
+        "description": "Deny all outbound traffic",
+        "destinationAddressPrefix": "*",
+        "destinationAddressPrefixes": [],
+        "destinationPortRange": "*",
+        "destinationPortRanges": [],
+        "direction": "Outbound",
+        "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+        "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/defaultSecurityRules/DenyAllOutBound",
+        "name": "DenyAllOutBound",
+        "priority": 65500,
+        "protocol": "*",
+        "provisioningState": "Succeeded",
+        "resourceGroup": "myResourceGroup",
+        "sourceAddressPrefix": "*",
+        "sourceAddressPrefixes": [],
+        "sourcePortRange": "*",
+        "sourcePortRanges": [],
+        "type": "Microsoft.Network/networkSecurityGroups/defaultSecurityRules"
+      }
+    ],
+    "etag": "W/\"4a5620d7-45d7-411d-af2f-dc933a9012d9\"",
+    "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG",
+    "location": "eastus",
+    "name": "DevNSG",
+    "provisioningState": "Succeeded",
+    "resourceGroup": "myResourceGroup",
+    "resourceGuid": "cecac376-7c69-46e4-993d-002a58db310c",
+    "securityRules": [],
+    "type": "Microsoft.Network/networkSecurityGroups"
+  }
+}
+
+C:\Windows\System32>az network nsg rule create --resource-group myResourceGroup --nsg-name DevNSG --name AllowICMP --protocol Icmp --direction Inbound --priority 1001 --access Allow --source-address-prefixes '*' --destination-address-prefixes '*' --source-port-ranges '*' --destination-port-ranges '*'
+{
+  "access": "Allow",
+  "destinationAddressPrefix": "*",
+  "destinationAddressPrefixes": [],
+  "destinationPortRange": "*",
+  "destinationPortRanges": [],
+  "direction": "Inbound",
+  "etag": "W/\"e92ae5fd-9305-4725-ab74-341318b17e3c\"",
+  "id": "/subscriptions/c6cb0288-19c9-4a37-94d6-63149b3a8033/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityGroups/DevNSG/securityRules/AllowICMP",
+  "name": "AllowICMP",
+  "priority": 1001,
+  "protocol": "Icmp",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "myResourceGroup",
+  "sourceAddressPrefix": "*",
+  "sourceAddressPrefixes": [],
+  "sourcePortRange": "*",
+  "sourcePortRanges": [],
+  "type": "Microsoft.Network/networkSecurityGroups/securityRules"
+}
